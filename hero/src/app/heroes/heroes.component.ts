@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
-
+import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service'
 
 
 @Component({
@@ -13,18 +13,28 @@ import { HEROES } from '../mock-heroes';
 export class HeroesComponent implements OnInit {
 
   
-  heroes = HEROES;
   
-  constructor() { }
+  constructor(private heroService: HeroService) { }
+  // The ngOnInit() is a lifecycle hook. Angular calls ngOnInit() shortly after creating a component. 
+  // It's a good place to put initialization logic.
+
+  // Reserve the constructor for simple initialization such as wiring constructor parameters to properties. 
+  // The constructor shouldn't do anything. 
+  // It certainly shouldn't call a function that makes HTTP requests to a remote server as a real data service would.
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
+  heroes!: Hero[];
+
+  getHeroes(): void {
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes)
+  }
   
   selectedHero!: Hero;
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
-  }
-  // The ngOnInit() is a lifecycle hook. Angular calls ngOnInit() shortly after creating a component. 
-  // It's a good place to put initialization logic.
-  ngOnInit(): void {
-
   }
   
 }

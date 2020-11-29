@@ -8,14 +8,13 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
 
+  constructor() { }
+  
+  ngOnInit(): void {
+  }
   // That's the only change you should make to the HeroDetailComponent class. There are no more properties. 
   // There's no presentation logic. 
   // This component simply receives a hero object through its hero property and displays it.
   @Input() hero!: Hero;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
