@@ -36,6 +36,11 @@ export class HeroDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    this.heroService.updateHero(this.hero)
+      .subscribe(() => this.goBack());
+  }
   // That's the only change you should make to the HeroDetailComponent class. There are no more properties. 
   // There's no presentation logic. 
   // This component simply receives a hero object through its hero property and displays it.
